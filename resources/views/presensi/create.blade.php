@@ -37,7 +37,12 @@
      </div>
      <div class="row">
         <div class="col">
-            <button id="takeabsen" class="btn btn-primary btn-block"><ion-icon name="camera-outline"></ion-icon>{{__('Absen Masuk')}}</button>
+            @if ($cek > 0 )
+                <button id="takeabsen" class="btn btn-danger btn-block"><ion-icon name="camera-outline"></ion-icon>{{__('Absen Pulang')}}</button>
+                
+            @else
+                <button id="takeabsen" class="btn btn-primary btn-block"><ion-icon name="camera-outline"></ion-icon>{{__('Absen Masuk')}}</button>
+            @endif
         </div>
      </div>
      <div class="row mt-1">
@@ -45,10 +50,22 @@
             <div id="map"></div>
         </div>
      </div>
-@endsection
+     <audio id="notifikasi-in">
+        <source src="{{asset('assetsk/audio/in.mp3')}}" type="audio/mpeg">
+     </audio>
+     <audio id="notifikasi-out">
+        <source src="{{asset('assetsk/audio/out.mp3')}}" type="audio/mpeg">
+     </audio>
+     <audio id="notifikasi-out-radius">
+        <source src="{{asset('assetsk/audio/out-radius.mp3')}}" type="audio/mpeg">
+     </audio>
+     @endsection
 
 @push('myscrip')
     <script>
+        var notifikasi_in =document.getElementById('notifikasi-in');
+        var notifikasi_out =document.getElementById('notifikasi-out');
+        var notifikasi_out_radius =document.getElementById('notifikasi-out-radius');
         Webcam.set({
             height: 480,
             width: 640,
@@ -73,11 +90,11 @@
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
             var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
-            var circle = L.circle([-6.900320, 112.048929], {
+            var circle = L.circle([-6.900287, 112.048966], {
                 color: 'red',
                 fillColor: '#f03',
                 fillOpacity: 0.5,
-                radius: 100
+                radius: 50
             }).addTo(map);
         }
         
@@ -99,7 +116,39 @@
                 },
                 cache: false,
                 success: function(respond) {
+                    var status = respond.split("|");
+                    if (status[0] == "success") {
 
+                        if (status[2] == "in") {
+                            notifikasi_in.play();
+                        }
+                        else {
+                            notifikasi_out.play();
+                        }
+                        
+                        Swal.fire({
+                            title: 'Berhasil..!',
+                            text: status[1],
+                            icon: 'success',
+                            confirmButtonText: "OK",
+                        });
+                        setTimeout(() => {
+                            window.location.href= "/dashboard";
+                        }, 7000);
+                        
+                    } else {
+
+                        if (status[2] == "out-radius") {
+                            notifikasi_out_radius.play();
+                        }
+                        Swal.fire({
+                            title: 'Error..!',
+                            text: status[1],
+                            icon: 'error'
+                        });
+
+                    } 
+                    
                 }
             });
         });
