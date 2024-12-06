@@ -1,35 +1,43 @@
-    <div class="appBottomMenu">
-        <a href="/dashboard" class="item {{ request()->is('dashboard') ? 'active' : ''}}">
-            <div class="col">
-                <ion-icon name="home-outline" role="img" class="md hydrated"></ion-icon>
-                <strong>Home</strong>
+<a href="#" class="floating-action-button" id="cameraButton">
+    <i class="fas fa-camera"></i>
+</a>
+
+
+
+<nav class="bottom-nav">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-2 text-center">
+                <a href="/dashboard" class="nav-link {{ request()->is('dashboard') ? 'active' : ''}}" data-name="home">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                    <div class="nav-indicator"></div>
+                </a>
             </div>
-        </a>
-        <a href="/calender" class="item {{ request()->is('calender') ? 'active' : ''}}">
-            <div class="col">
-                <ion-icon name="calendar-outline" role="img" class="md hydrated"
-                    aria-label="calendar outline"></ion-icon>
-                <strong>Calendar</strong>
+            <div class="col-2 text-center">
+                <a href="#" class="nav-link" data-name="calendar">
+                    <i class="fas fa-calendar"></i>
+                    <span>Calendar</span>
+                    <div class="nav-indicator"></div>
+                </a>
             </div>
-        </a>
-        <a href="/presensi/create" class="item">
-            <div class="col">
-                <div class="action-button large">
-                    <ion-icon name="camera" role="img" class="md hydrated" aria-label="add outline"></ion-icon>
-                </div>
+            <div class="col-2 text-center">
+                <!-- Empty space for the floating action button -->
             </div>
-        </a>
-        <a href="#" class="item">
-            <div class="col">
-                <ion-icon name="document-text-outline" role="img" class="md hydrated"
-                    aria-label="document text outline"></ion-icon>
-                <strong>Docs</strong>
+            <div class="col-2 text-center">
+                <a href="#" class="nav-link" data-name="docs">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Docs</span>
+                    <div class="nav-indicator"></div>
+                </a>
             </div>
-        </a>
-        <a href="javascript:;" class="item">
-            <div class="col">
-                <ion-icon name="people-outline" role="img" class="md hydrated" aria-label="people outline"></ion-icon>
-                <strong>Profile</strong>
+            <div class="col-2 text-center">
+                <a href="#" class="nav-link" data-name="profile">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                    <div class="nav-indicator"></div>
+                </a>
             </div>
-        </a>
+        </div>
     </div>
+</nav>

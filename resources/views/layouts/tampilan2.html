@@ -1,335 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attendance System</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Modern Mobile UI Kit</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #4a6bff;
-            --secondary-color: #f0f4ff;
-            --success-color: #00c853;
-            --danger-color: #ff5252;
-            --text-color: #333333;
-            --light-text-color: #ffffff;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-            padding-bottom: 80px;
-        }
-        .bg-primary {
-            background-color: var(--primary-color) !important;
-        }
-        .text-primary {
-            color: var(--primary-color) !important;
-        }
-        .btn-success {
-            background-color: var(--success-color);
-            border-color: var(--success-color);
-        }
-        .btn-danger {
-            background-color: var(--danger-color);
-            border-color: var(--danger-color);
-        }
-        .card {
-            border-radius: 15px;
-            border: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: var(--light-text-color);
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-        }
-        .bottom-nav .nav-link {
-            color: var(--text-color);
-            opacity: 0.7;
-            transition: all 0.3s ease;
-        }
-        .bottom-nav .nav-link.active {
-            color: var(--primary-color);
-            opacity: 1;
-        }
-        .camera-button {
-            background-color: var(--primary-color);
-            color: var(--light-text-color);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: -30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        .camera-button:hover {
-            transform: scale(1.1);
-        }
-        .notification-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background-color: var(--danger-color);
-            color: var(--light-text-color);
-            border-radius: 50%;
-            padding: 0.25rem 0.5rem;
-            font-size: 0.75rem;
-        }
-        .profile-header {
-            background: linear-gradient(135deg, var(--primary-color), #7a8fff);
-            border-bottom-left-radius: 30px;
-            border-bottom-right-radius: 30px;
-        }
-        .quick-actions .card {
-            height: 100px;
-        }
-        .attendance-card {
-            height: 120px;
-        }
-        .stats-card {
-            height: 100px;
-        }
+        
     </style>
 </head>
+
 <body>
-    <div class="profile-header text-white py-4 mb-4">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-auto">
-                    <img src="https://via.placeholder.com/60" alt="Profile" class="rounded-circle border border-white">
-                </div>
-                <div class="col">
-                    <h5 class="mb-0">Aminu Bil Huda</h5>
-                    <small>Head Of IT</small>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="container">
-        <div class="row quick-actions g-3 mb-4">
-            <div class="col-3">
-                <div class="card h-100 text-center">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                        <i class="fas fa-user text-primary mb-2"></i>
-                        <p class="card-text small">Profil</p>
+
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-3 menu-item">
+                        <div class="menu-icon text-primary"><i class="fas fa-user-circle"></i></div>
+                        <div class="menu-name">Profil</div>
                     </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card h-100 text-center">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                        <i class="fas fa-calendar text-danger mb-2"></i>
-                        <p class="card-text small">Cuti</p>
+                    <div class="col-3 menu-item">
+                        <div class="menu-icon text-danger"><i class="fas fa-calendar-alt"></i></div>
+                        <div class="menu-name">Cuti</div>
                     </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card h-100 text-center">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                        <i class="fas fa-history text-primary mb-2"></i>
-                        <p class="card-text small">Histori</p>
+                    <div class="col-3 menu-item">
+                        <div class="menu-icon text-warning"><i class="fas fa-history"></i></div>
+                        <div class="menu-name">Histori</div>
                     </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card h-100 text-center">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                        <i class="fas fa-map-marker-alt text-warning mb-2"></i>
-                        <p class="card-text small">Lokasi</p>
+                    <div class="col-3 menu-item">
+                        <div class="menu-icon text-info"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="menu-name">Lokasi</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row g-3 mb-4">
+        <div class="row mb-4">
             <div class="col-6">
-                <div class="card bg-success text-white attendance-card">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                        <div class="d-flex align-items-center mb-2">
-                            <img src="https://via.placeholder.com/40" alt="Check In" class="rounded-circle me-2">
-                            <div>
-                                <small>Masuk</small>
-                                <h5 class="mb-0">06:45:08</h5>
-                            </div>
-                        </div>
-                        <div class="progress" style="height: 5px;">
-                            <div class="progress-bar bg-light" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
+                <div class="card presence-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Masuk</h5>
+                        <p class="card-text" id="checkInTime">06:45:08</p>
                     </div>
                 </div>
             </div>
             <div class="col-6">
-                <div class="card bg-danger text-white attendance-card">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                        <div class="d-flex align-items-center mb-2">
-                            <img src="https://via.placeholder.com/40" alt="Check Out" class="rounded-circle me-2">
-                            <div>
-                                <small>Pulang</small>
-                                <h5 class="mb-0">14:47:43</h5>
-                            </div>
-                        </div>
-                        <div class="progress" style="height: 5px;">
-                            <div class="progress-bar bg-light" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
+                <div class="card presence-card out">
+                    <div class="card-body">
+                        <h5 class="card-title">Pulang</h5>
+                        <p class="card-text" id="checkOutTime">14:47:43</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <h6 class="text-primary mb-3">Rekap Presensi Bulan Desember Tahun 2024</h6>
-
-        <div class="row g-3 mb-4">
-            <div class="col-3">
-                <div class="card stats-card text-center">
-                    <div class="card-body position-relative d-flex flex-column justify-content-center">
-                        <span class="notification-badge">1</span>
-                        <i class="fas fa-user-check text-success mb-2"></i>
-                        <p class="card-text small mb-0">Hadir</p>
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Rekap Presensi Bulan Desember Tahun 2024</h4>
+                <div class="row text-center">
+                    <div class="col-3">
+                        <div class="recap-icon text-success"><i class="fas fa-user-check"></i></div>
+                        <div class="recap-name">Hadir</div>
+                        <div class="recap-count">1</div>
                     </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card stats-card text-center">
-                    <div class="card-body position-relative d-flex flex-column justify-content-center">
-                        <span class="notification-badge">30</span>
-                        <i class="fas fa-calendar-check text-primary mb-2"></i>
-                        <p class="card-text small mb-0">Izin</p>
+                    <div class="col-3">
+                        <div class="recap-icon text-primary"><i class="fas fa-calendar-check"></i></div>
+                        <div class="recap-name">Izin</div>
+                        <div class="recap-count">10</div>
                     </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card stats-card text-center">
-                    <div class="card-body position-relative d-flex flex-column justify-content-center">
-                        <span class="notification-badge">10</span>
-                        <i class="fas fa-file-medical text-info mb-2"></i>
-                        <p class="card-text small mb-0">Sakit</p>
+                    <div class="col-3">
+                        <div class="recap-icon text-info"><i class="fas fa-procedures"></i></div>
+                        <div class="recap-name">Sakit</div>
+                        <div class="recap-count">10</div>
                     </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card stats-card text-center">
-                    <div class="card-body position-relative d-flex flex-column justify-content-center">
-                        <span class="notification-badge">0</span>
-                        <i class="fas fa-clock text-warning mb-2"></i>
-                        <p class="card-text small mb-0">Telat</p>
+                    <div class="col-3">
+                        <div class="recap-icon text-warning"><i class="fas fa-clock"></i></div>
+                        <div class="recap-name">Telat</div>
+                        <div class="recap-count">0</div>
                     </div>
                 </div>
             </div>
         </div>
 
-
-        <div class="presencetab mt-4">
-            <ul class="nav nav-tabs style1" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" data-bs-toggle="tab" href="#bulanIni" role="tab">
-                        Bulan Ini
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="tab" href="#leaderboard" role="tab">
-                        Leaderboard
-                    </a>
-                </li>
-            </ul>
-            <div class="tab-content mt-3">
-                <div class="tab-pane fade show active" id="bulanIni" role="tabpanel">
-                    <div class="card mb-4 w-100 p-0">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex align-items-center">
-                                    <div class="bg-primary text-white rounded-circle p-2 me-3">
-                                        <i class="fas fa-calendar"></i>
-                                    </div>
-                                    <span>06-12-2024</span>
+        <div class="card">
+            <div class="card-body">
+                <ul class="nav nav-tabs" id="presenceTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="month-tab" data-bs-toggle="tab" data-bs-target="#month"
+                            type="button" role="tab" aria-controls="month" aria-selected="true">Bulan Ini</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="leaderboard-tab" data-bs-toggle="tab" data-bs-target="#leaderboard"
+                            type="button" role="tab" aria-controls="leaderboard"
+                            aria-selected="false">Leaderboard</button>
+                    </li>
+                </ul>
+                <div class="tab-content mt-3" id="presenceTabContent">
+                    <div class="tab-pane fade show active" id="month" role="tabpanel" aria-labelledby="month-tab">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-fingerprint me-2 text-primary"></i>
+                                    06-12-2024
                                 </div>
                                 <div>
-                                    <span class="text-success me-2">06:45:08</span>
-                                    <span class="text-danger">14:47:43</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="leaderboard" role="tabpanel">
-                        <ul class="listview image-listview">
-                            <!-- Placeholder data -->
-        
-                            <li>
-                                <div class="item">
-                                    <img src="https://via.placeholder.com/40" alt="avatar" class="image rounded-circle">
-                                    <div class="in">
-                                        <div>
-                                            <b>John Doe</b><br>
-                                            <i><small class="text-muted">Software Developer</small></i>
-                                        </div>
-                                        <span class="text-muted">07:45:00</span>
-                                    </div>
+                                    <span class="badge bg-success me-1">06:45:08</span>
+                                    <span class="badge bg-danger">14:47:43</span>
                                 </div>
                             </li>
-        
-                            <!-- Add more list items as needed -->
+                            <!-- Add more list items for other dates -->
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="leaderboard" role="tabpanel" aria-labelledby="leaderboard-tab">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <img src="https://via.placeholder.com/40" alt="User Avatar"
+                                        class="rounded-circle me-3">
+                                    <div>
+                                        <strong>Aminu Bil Huda</strong><br>
+                                        <small class="text-muted">Head Of IT</small>
+                                    </div>
+                                </div>
+                                <span class="text-primary">06:45:08</span>
+                            </li>
+                            <!-- Add more list items for other users -->
                         </ul>
                     </div>
                 </div>
             </div>
-            <!-- end -->
         </div>
-        
-            
-
-        
     </div>
 
-    <nav class="bottom-nav py-2">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col">
-                    <a href="#" class="nav-link active">
-                        <i class="fas fa-home"></i>
-                        <small class="d-block">Home</small>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-calendar"></i>
-                        <small class="d-block">Calendar</small>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="#" class="nav-link camera-button">
-                        <i class="fas fa-camera"></i>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-file-alt"></i>
-                        <small class="d-block">Docs</small>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-user"></i>
-                        <small class="d-block">Profile</small>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
