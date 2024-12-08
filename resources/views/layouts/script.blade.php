@@ -1,103 +1,81 @@
 <!-- Jquery -->
-    <script src="{{asset ('assetsk/js/lib/jquery-3.4.1.min.js')}}"></script>
-    <!-- Bootstrap-->
-    {{-- <script src="{{asset ('assetsk/js/lib/popper.min.js')}}"></script> --}}
-    {{-- <script src="{{asset ('assetsk/js/lib/bootstrap.min.js')}}"></script> --}}
-    <!-- Ionicons -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <!-- Owl Carousel -->
-    {{-- <script src="{{asset ('assetsk/js/plugins/owl-carousel/owl.carousel.min.js')}}"></script> --}}
-    <!-- jQuery Circle Progress -->
-    {{-- <script src="{{asset ('assetsk/js/plugins/jquery-circle-progress/circle-progress.min.js')}}"></script> --}}
-    {{-- <script src="https://cdn.amcharts.com/lib/4/core.js"></script> --}}
-    {{-- <script src="https://cdn.amcharts.com/lib/4/charts.js"></script> --}}
-    {{-- <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script> --}}
-    {{-- webcam --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
-    {{-- sweet alert --}}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Base Js File -->
-    <script src="{{asset ('assetsk/js/base.js')}}"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
-    <script>
-        am4core.ready(function () {
+<!-- Ionicons -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+{{-- webcam --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+{{-- sweet alert --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- Base Js File -->
+<script src="{{ asset('templates/assets_k/js/base.js') }}"></script>
 
-            // Themes begin
-            am4core.useTheme(am4themes_animated);
-            // Themes end
+{{-- ionicons --}}
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-            var chart = am4core.create("chartdiv", am4charts.PieChart3D);
-            chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+<script>
+    // Fungsi untuk mengubah tab yang aktif
+    function switchTab(tabName) {
+            // Menyembunyikan semua konten tab
+            const allTabs = document.querySelectorAll('.tab-content');
+            allTabs.forEach(tab => tab.classList.add('hidden'));
 
-            chart.legend = new am4charts.Legend();
+            // Menampilkan tab yang dipilih
+            const selectedTab = document.getElementById(tabName);
+            selectedTab.classList.remove('hidden');
 
-            chart.data = [
-                {
-                    country: "Hadir",
-                    litres: 501.9
-                },
-                {
-                    country: "Sakit",
-                    litres: 301.9
-                },
-                {
-                    country: "Izin",
-                    litres: 201.1
-                },
-                {
-                    country: "Terlambat",
-                    litres: 165.8
-                },
-            ];
-
-
-
-            var series = chart.series.push(new am4charts.PieSeries3D());
-            series.dataFields.value = "litres";
-            series.dataFields.category = "country";
-            series.alignLabels = false;
-            series.labels.template.text = "{value.percent.formatNumber('#.0')}%";
-            series.labels.template.radius = am4core.percent(-40);
-            series.labels.template.fill = am4core.color("white");
-            series.colors.list = [
-                am4core.color("#1171ba"),
-                am4core.color("#fca903"),
-                am4core.color("#37db63"),
-                am4core.color("#ba113b"),
-            ];
-        }); // end am4core.ready()
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Update check-in and check-out times
-        // function updateTimes() {
-        //     const now = new Date();
-        //     document.getElementById('checkInTime').textContent = now.toLocaleTimeString();
-        //     document.getElementById('checkOutTime').textContent = now.toLocaleTimeString();
-        // }
-
-        // Simulate real-time updates
-        // setInterval(updateTimes, 1000);
-
-        // Add hover effects to menu items
-        document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('mouseover', () => {
-                item.querySelector('.menu-icon').style.transform = 'scale(1.1)';
+            // Menonaktifkan semua tombol tab
+            const allTabButtons = document.querySelectorAll('.tab-btn');
+            allTabButtons.forEach(button => {
+                button.classList.remove('tab-btn-active');  // Menghapus kelas aktif
+                button.classList.add('tab-btn-inactive');  // Menambahkan kelas tidak aktif
             });
-            item.addEventListener('mouseout', () => {
-                item.querySelector('.menu-icon').style.transform = 'scale(1)';
-            });
-        });
 
-        // Add active class to bottom nav items on click
-        document.querySelectorAll('.bottom-nav .nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                document.querySelector('.bottom-nav .nav-link.active').classList.remove('active');
-                link.classList.add('active');
+            // Menambahkan kelas aktif pada tombol yang dipilih
+            const activeButton = document.getElementById(`${tabName}-tab`);
+            activeButton.classList.add('tab-btn-active');  // Menambahkan border biru pada tab aktif
+            activeButton.classList.remove('tab-btn-inactive');  // Menghapus kelas tidak aktif
+        }
+
+        // Menginisialisasi dengan tab 'leaderboard' yang aktif
+        switchTab('data-absen');
+
+
+        // Fungsi untuk mengatur tab yang aktif pada navigasi bawah
+        function setActiveTab(tabId) {
+            const tabs = ['dashboard', 'calendar', 'camera', 'docs', 'settings'];
+
+            // Menghapus kelas 'active-nav-btn' dari semua link
+            tabs.forEach(tab => {
+                document.getElementById(tab + '-link').classList.remove('active-nav-btn');
+                document.getElementById(tab + '-link').classList.add('inactive-nav-btn');
             });
-        });
-    </script>
-    @stack('myscrip')
+
+            // Menambahkan kelas 'active-nav-btn' pada link yang dipilih
+            document.getElementById(tabId + '-link').classList.add('active-nav-btn');
+            document.getElementById(tabId + '-link').classList.remove('inactive-nav-btn');
+        }
+
+        // Menginisialisasi dengan tab 'home' yang aktif
+        setActiveTab('home');
+
+</script>
+
+<script>
+ function previewImage(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      
+      reader.onload = function() {
+        const imagePreview = document.getElementById('imagePreview');
+        imagePreview.src = reader.result;
+        imagePreview.classList.remove('hidden'); // Show the image
+      };
+      
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    }
+  </script>
+@stack('myscrip')

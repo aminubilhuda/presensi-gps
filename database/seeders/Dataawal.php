@@ -22,5 +22,14 @@ class Dataawal extends Seeder
             'email' => "aminubilhuda0707@gmail.com",
             'password' => Hash::make('12345'),
         ]);
+
+        DB::table('karyawan')->insert([
+            'nama_lengkap' => "Siti Astina Maharani",
+            "nik"=> "4321",
+            "jabatan"=> "Staff IT",
+            "no_hp"=> "088888888888",
+            'email' => "asitiastina@gmail.com",
+            'password' => Hash::make('4321'),
+        ]);
     }
 }

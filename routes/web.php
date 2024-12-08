@@ -9,7 +9,7 @@ Route::middleware(['guest:karyawan'])->group(function () {
     Route::get('/', function () {
         return view('auth.login');
     })->name('login');
-    Route::post('/proseslogin', [AuthController::class,'prosesLogin'])->name('prosesLogin');
+    Route::post('/proseslogin', [AuthController::class,'prosesLogin'])->name('proseslogin');
 });
 
 
@@ -20,4 +20,7 @@ Route::middleware(['auth:karyawan'])->group(function () {
     // presensi
     Route::get('/presensi/create', [PresensiController::class,'create'])->name('presensiCreate');
     Route::post('/presensi/store', [PresensiController::class,'store'])->name('presensiStore');
+
+    // edit profile
+    Route::get('/editprofile', [PresensiController::class,'editProfile'])->name('presensiEditProfile');
 });

@@ -47,7 +47,7 @@ class PresensiController extends Controller
         $fileName = $formatName . ".png";
         $file = $folderPath . $fileName;
         
-        if ($radius > 50) {
+        if ($radius > 10000) {
             echo "error|Maaf Anda Berada Diluar Radius, Jarak anda " . $radius ." meter dari kantor|out-radius";
         } else {
             if($cek > 0){
@@ -97,5 +97,10 @@ class PresensiController extends Controller
         $kilometers = $miles * 1.609344;
         $meters = $kilometers * 1000;
         return compact('meters');
+    }
+
+    public function editProfile()
+    {
+        return view("presensi.editprofile");
     }
 }

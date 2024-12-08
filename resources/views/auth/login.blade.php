@@ -1,100 +1,59 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="id">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#000000">
-    <title>E-Presensi</title>
-    <meta name="description" content="Mobilekit HTML Mobile UI Kit">
-    <meta name="keywords" content="bootstrap 4, mobile template, cordova, phonegap, mobile, html" />
-    <link rel="icon" type="image/png" href="{{asset ('assetsk/img/favicon.png" sizes="32x32')}}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset ('assetsk/img/icon/192x192.png')}}">
-    <link rel="stylesheet" href="{{asset ('assetsk/css/style.css')}}">
-    <link rel="manifest" href="__manifest.json">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-white">
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
 
-    <!-- loader -->
-    <div id="loader">
-        <div class="spinner-border text-primary" role="status"></div>
-    </div>
-    <!-- * loader -->
+    <!-- Container -->
+    <div class="bg-white w-full max-w-sm p-8 rounded-lg shadow-lg">
 
+        <!-- Title -->
+        <h2 class="text-2xl font-semibold text-center text-gray-700 mb-6">Login</h2>
 
-    <!-- App Capsule -->
-    <div id="appCapsule" class="pt-0">
-
-        <div class="login-form mt-1">
-            <div class="section">
-                <img src="{{asset ('assetsk/img/login/login.svg')}}" alt="image" class="form-image">
+        <!-- Form -->
+        <form action="/proseslogin" method="POST">
+            @csrf
+            <!-- Email Input -->
+            <div class="mb-4">
+                <label for="nik" class="block text-sm font-medium text-gray-600">NIK</label>
+                <input type="nik" id="nik" name="nik"
+                    class="w-full mt-2 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Masukkan nik" required>
             </div>
-            <div class="section mt-1">
-                <h1>E-Presensi</h1>
-                <h4>Silahkan Login</h4>
+
+            <!-- Password Input -->
+            <div class="mb-6">
+                <label for="password" class="block text-sm font-medium text-gray-600">Password</label>
+                <input type="password" id="password" name="password"
+                    class="w-full mt-2 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Masukkan password" required>
             </div>
-            @if(session('warning'))
-                <div class="alert alert-outline-warning">
-                    {{ session('warning') }}
-                </div>
-            @endif
-            <div class="section mt-1 mb-5">
-                <form action="{{route ('prosesLogin')}}" method="post">
-                    @csrf
-                    <div class="form-group boxed">
-                        <div class="input-wrapper">
-                            <input type="text" name="nik" class="form-control" id="nik1" autocomplete="off" placeholder="NIK">
-                            <i class="clear-input">
-                                <ion-icon name="close-circle"></ion-icon>
-                            </i>
-                        </div>
-                    </div>
 
-                    <div class="form-group boxed">
-                        <div class="input-wrapper">
-                            <input type="password" name="password" class="form-control" id="password1" autocomplete="off" placeholder="Password">
-                            <i class="clear-input">
-                                <ion-icon name="close-circle"></ion-icon>
-                            </i>
-                        </div>
-                    </div>
+            <!-- Login Button -->
+            <button type="submit"
+                class="w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                Login
+            </button>
 
-                    <div class="form-links mt-2">
-                        <div><a href="page-forgot-password.html" class="text-muted">Forgot Password?</a></div>
-                    </div>
-
-                    <div class="form-button-group">
-                        <button type="submit" class="btn btn-primary btn-block btn-lg">Log in</button>
-                    </div>
-
-                </form>
+            <!-- Forgot Password Link -->
+            <div class="mt-4 text-center">
+                <a href="#" class="text-sm text-blue-500 hover:underline">Lupa password?</a>
             </div>
-        </div>
 
+            <!-- Register Link -->
+            <div class="mt-4 text-center">
+                <p class="text-sm text-gray-600">Belum punya akun? <a href="#"
+                        class="text-blue-500 hover:underline">Daftar di sini</a></p>
+            </div>
+        </form>
 
     </div>
-    <!-- * App Capsule -->
-
-
-    <!-- ///////////// Js Files ////////////////////  -->
-    <!-- Jquery -->
-    <script src="{{asset ('assetsk/js/lib/jquery-3.4.1.min.js')}}"></script>
-    <!-- Bootstrap-->
-    <script src="{{asset ('assetsk/js/lib/popper.min.js')}}"></script>
-    <script src="{{asset ('assetsk/js/lib/bootstrap.min.js')}}"></script>
-    <!-- Ionicons -->
-    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
-    <!-- Owl Carousel -->
-    <script src="{{asset ('assetsk/js/plugins/owl-carousel/owl.carousel.min.js')}}"></script>
-    <!-- jQuery Circle Progress -->
-    <script src="{{asset ('assetsk/js/plugins/jquery-circle-progress/circle-progress.min.js')}}"></script>
-    <!-- Base Js File -->
-    <script src="{{asset ('assetsk/js/base.js')}}"></script>
-
 
 </body>
 

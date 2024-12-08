@@ -1,71 +1,94 @@
 @extends('layouts.presensi')
 
 @section('header')
-    <div class="appHeader bg-primary text-light">
-        <div class="left">
-            <a href="javascript:;" class="headerButton goBack">
-                <ion-icon name="chevron-back-outline"></ion-icon>
-            </a>
-        </div>
-        <div class="pageTitle">E-Presensi</div>
-        <div class="right"></div>
+<div class="bg-gradient-to-r from-blue-500 to-indigo-600 bg-white text-white flex items-center justify-between p-4 shadow-lg z-1">
+    <!-- Left Section (Go Back Button) -->
+    <div class="left">
+        <a href="/dashboard" class="headerButton goBack text-white">
+            <ion-icon name="chevron-back-outline" class="text-2xl"></ion-icon>
+        </a>
     </div>
 
-    <style>
-        .webcam-capture,
-        .webcam-capture video {
-            display: inline-block;
-            width: 100% !important;
-            margin: auto;
-            height: auto !important;
-            border-radius: 15px;
-        }
-        #map { height: 200px; }
-    </style>
-     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" ></script>
+    <!-- Page Title -->
+    <div class="pageTitle text-xl font-semibold">
+        E-Presensi
+    </div>
+
+    <!-- Right Section (Empty for now) -->
+    <div class="right">
+        <!-- You can add content to the right section if needed -->
+    </div>
+</div>
+
+<style>
+    .webcam-capture,
+    .webcam-capture video {
+        display: inline-block;
+        width: 100% !important;
+        margin: auto;
+        height: auto !important;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+    #map { height: 250px; }
+</style>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" ></script>
 @endsection
 
 @section('content')
-     <div class="row" style="margin-top: 65px">
-        <div class="col">
-            <input type="hidden" id="lokasi">
-            <div class="webcam-capture">
+<div class="pt-2 z-0"> <!-- Equivalent to margin-top: 65px -->
+    <div class="px-4"> <!-- Column padding -->
+        <input type="hidden" id="lokasi">
+        <div class="webcam-capture w-full">
+            <!-- Webcam capture area -->
+        </div>
+    </div>
+</div>
 
-            </div>
-        </div>
-     </div>
-     <div class="row">
-        <div class="col">
-            @if ($cek > 0 )
-                <button id="takeabsen" class="btn btn-danger btn-block"><ion-icon name="camera-outline"></ion-icon>{{__('Absen Pulang')}}</button>
-                
-            @else
-                <button id="takeabsen" class="btn btn-primary btn-block"><ion-icon name="camera-outline"></ion-icon>{{__('Absen Masuk')}}</button>
-            @endif
-        </div>
-     </div>
-     <div class="row mt-1">
-        <div class="col">
-            <div id="map"></div>
-        </div>
-     </div>
-     <audio id="notifikasi-in">
-        <source src="{{asset('assetsk/audio/in.mp3')}}" type="audio/mpeg">
-     </audio>
-     <audio id="notifikasi-out">
-        <source src="{{asset('assetsk/audio/out.mp3')}}" type="audio/mpeg">
-     </audio>
-     <audio id="notifikasi-out-radius">
-        <source src="{{asset('assetsk/audio/out-radius.mp3')}}" type="audio/mpeg">
-     </audio>
-     @endsection
+<div class="px-4"> <!-- Row with button -->
+    <div class="w-full">
+        @if ($cek > 0)
+            <button id="takeabsen" class="w-full bg-red-500 text-white py-3 rounded-lg flex items-center justify-center space-x-2 hover:bg-red-600 transition duration-300">
+                <ion-icon name="camera-outline" class="text-xl"></ion-icon>
+                <span>{{__('Absen Pulang')}}</span>
+            </button>
+        @else
+            <button id="takeabsen" class="w-full bg-green-500 text-white py-3 rounded-lg flex items-center justify-center space-x-2 hover:bg-green-600 transition duration-300">
+                <ion-icon name="camera-outline" class="text-xl"></ion-icon>
+                <span>{{__('Absen Masuk')}}</span>
+            </button>
+        @endif
+    </div>
+</div>
+
+<div class="px-4 mt-1"> <!-- Map row -->
+    <div class="w-full">
+        <div id="map" class="w-full h-64 z-0 rounded-lg"></div> <!-- Added some height for the map -->
+    </div>
+</div>
+
+<div class="px-4">
+    Selamat Absen
+</div>
+
+<audio id="notifikasi-in">
+    <source src="{{asset('templates/assets_k/audio/in.mp3')}}" type="audio/mpeg">
+</audio>
+<audio id="notifikasi-out">
+    <source src="{{asset('templates/assets_k/audio/out.mp3')}}" type="audio/mpeg">
+</audio>
+<audio id="notifikasi-out-radius">
+    <source src="{{asset('templates/assets_k/audio/out-radius.mp3')}}" type="audio/mpeg">
+</audio>
+@endsection
 
 @push('myscrip')
     <script>
-        var notifikasi_in =document.getElementById('notifikasi-in');
-        var notifikasi_out =document.getElementById('notifikasi-out');
-        var notifikasi_out_radius =document.getElementById('notifikasi-out-radius');
+        var notifikasi_in = document.getElementById('notifikasi-in');
+        var notifikasi_out = document.getElementById('notifikasi-out');
+        var notifikasi_out_radius = document.getElementById('notifikasi-out-radius');
         Webcam.set({
             height: 480,
             width: 640,
@@ -94,10 +117,10 @@
                 color: 'red',
                 fillColor: '#f03',
                 fillOpacity: 0.5,
-                radius: 50
+                radius: 10000
             }).addTo(map);
         }
-        
+
         function errorCallback() {
         }
 
@@ -125,30 +148,29 @@
                         else {
                             notifikasi_out.play();
                         }
-                        
+
                         Swal.fire({
-                            title: 'Berhasil..!',
+                            title: 'Berhasil..! ',
                             text: status[1],
                             icon: 'success',
                             confirmButtonText: "OK",
                         });
+
                         setTimeout(() => {
                             window.location.href= "/dashboard";
                         }, 7000);
-                        
+
                     } else {
 
                         if (status[2] == "out-radius") {
                             notifikasi_out_radius.play();
                         }
                         Swal.fire({
-                            title: 'Error..!',
+                            title: 'Error..! ',
                             text: status[1],
                             icon: 'error'
                         });
-
-                    } 
-                    
+                    }
                 }
             });
         });

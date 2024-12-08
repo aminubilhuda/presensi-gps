@@ -2,110 +2,202 @@
 
 @section('content')
 
-        <div class="user-section text-center mb-4">
-            <img src="{{asset('assetsk/img/sample/avatar/avatar1.jpg')}}" alt="User Avatar" class="rounded-circle mb-3 user-avatar" style="width: 64px">
-            <h2 class="mb-0">{{Auth::guard("karyawan")->user()->nama_lengkap}}</h2>
-            <span class="text-light">{{Auth::guard("karyawan")->user()->jabatan}}</span>
+<!-- Main Profile Card -->
+<section class="p-2">
+    <div
+        class="bg-gradient-to-r from-indigo-500 to-purple-600 p-6 rounded-3xl shadow-xl-custom flex items-center space-x-6 transition-transform transform hover:scale-105 ease-in-out">
+        <!-- Profile Picture -->
+        <div class="relative">
+            <img src="{{asset('assets_k/img/sample/avatar/avatar1.jpg')}}" alt="Profile"
+                class="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg hover:scale-105 transition duration-300">
+            <!-- Badge or Status indicator -->
+            <span class="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-green-500 border-2 border-white"></span>
         </div>
 
-        <div class="card mb-4">
-            <div class="card-body">
-                <div class="row text-center">
-                    <div class="col-3 menu-item">
-                        <div class="menu-icon text-primary"><i class="fas fa-user-circle"></i></div>
-                        <div class="menu-name">Profil</div>
-                    </div>
-                    <div class="col-3 menu-item">
-                        <div class="menu-icon text-danger"><i class="fas fa-calendar-alt"></i></div>
-                        <div class="menu-name">Cuti</div>
-                    </div>
-                    <div class="col-3 menu-item">
-                        <div class="menu-icon text-warning"><i class="fas fa-history"></i></div>
-                        <div class="menu-name">Histori</div>
-                    </div>
-                    <div class="col-3 menu-item">
-                        <div class="menu-icon text-info"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="menu-name">Lokasi</div>
-                    </div>
+        <!-- Profile Info -->
+        <div class="text-white">
+            <h2 class="text-2xl font-semibold tracking-tight">{{Auth::guard("karyawan")->user()->nama_lengkap}}</h2>
+            <p class="text-lg opacity-80 mt-1">{{Auth::guard("karyawan")->user()->nik}}</p>
+            <p class="text-sm opacity-70 mt-1">{{Auth::guard("karyawan")->user()->jabatan}}</p>
+        </div>
+    </div>
+</section>
+
+<!-- Card Overview (Cuti, Histori, Lokasi, Profile) -->
+<section class="p-2">
+    <div
+        class="bg-white text-gray-800 p-6 rounded-xl shadow-xl-custom glassmorphism transition duration-300 ease-in-out flex justify-between items-center space-x-6">
+        <!-- Cuti Icon -->
+        <div class="flex flex-col items-center text-center hover:scale-150 transition duration-300 ease-in-out">
+            <span class="material-icons text-4xl text-indigo-500">event_available</span>
+            <p class="mt-2 text-lg text-gray-700">Cuti</p>
+        </div>
+
+        <!-- Histori Icon -->
+        <div class="flex flex-col items-center text-center hover:scale-150 transition duration-300 ease-in-out">
+            <span class="material-icons text-4xl text-teal-500">history</span>
+            <p class="mt-2 text-lg text-gray-700">Histori</p>
+        </div>
+
+        <!-- Lokasi Icon -->
+        <div class="flex flex-col items-center text-center hover:scale-150 transition duration-300 ease-in-out">
+            <span class="material-icons text-4xl text-orange-500">location_on</span>
+            <p class="mt-2 text-lg text-gray-700">Lokasi</p>
+        </div>
+
+        <!-- Profile Icon -->
+        <div class="flex flex-col items-center text-center hover:scale-150 transition duration-300 ease-in-out">
+            <span class="material-icons text-4xl text-blue-500">account_circle</span>
+            <p class="mt-2 text-lg text-gray-700">Profil</p>
+        </div>
+    </div>
+</section>
+
+<!-- Card for Masuk and Pulang with Photos -->
+<section class="p-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Masuk Card -->
+    <div
+        class="bg-white text-gray-800 p-8 rounded-xl shadow-xl-custom glassmorphism hover:scale-105 transition duration-300 ease-in-out">
+        <div class="flex items-center space-x-4">
+            @if ($presensihariini != null)
+            <img src="{{ asset('storage/uploads/absensi/'.$presensihariini->foto_in) }}" alt="Masuk Photo"
+                class="w-16 h-16 rounded-full object-cover border-4 border-green-500 shadow-lg">
+            @else
+            <div class="bg-blue">
+                <ion-icon name="camera"></ion-icon>
+            </div>
+            @endif
+            <div>
+                <p class="text-lg font-semibold opacity-70">Masuk</p>
+                <p class="text-3xl font-bold text-green-500">{{ $presensihariini != null ? $presensihariini->jam_in : "Belum Absen" }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pulang Card -->
+    <div
+        class="bg-white text-gray-800 p-8 rounded-xl shadow-xl-custom glassmorphism hover:scale-105 transition duration-300 ease-in-out">
+        <div class="flex items-center space-x-4">
+            @if ($presensihariini != null && $presensihariini->foto_out != null)
+            <img src="{{ asset('storage/uploads/absensi/'.$presensihariini->foto_out) }}" alt="Pulang Photo"
+                class="w-16 h-16 rounded-full object-cover border-4 border-red-500 shadow-lg">
+            @else
+            <div class="bg-blue">
+                <ion-icon name="camera"></ion-icon>
+            </div>
+            @endif
+            <div>
+                <p class="text-lg font-semibold opacity-70">Pulang</p>
+                <p class="text-3xl font-bold text-red-500">{{ $presensihariini != null && $presensihariini->jam_out != null ? $presensihariini->jam_out : "Belum Absen" }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+ <!-- Kehadiran Rekap: Berjajar 2 Kolom -->
+ <section class="p-2">
+    <div class="flex flex-col space-y-2 bg-white text-gray-800 rounded-xl shadow-xl-custom p-4 mb-1">
+        <!-- Rekap Presensi Header -->
+        <h4 class="text-md font-semibold">Rekap Presensi Bulan {{ $namabulan[$bulanini]}} Tahun {{ $tahunini}}</h4>
+    
+        <!-- Card Grid -->
+        <div class="bg-gradient-to-r from-teal-400 to-blue-500 rounded-xl p-4 shadow-xl-custom grid grid-cols-4 md:grid-cols-4 gap-2">
+            <!-- Hadir Card -->
+            <div class="relative text-center text-white bg-white rounded-lg p-3 shadow-lg border border-gray-300 hover:scale-110 transition duration-300 ease-in-out">
+                <span class="material-icons text-4xl text-green-500">check_circle</span>
+                <p class="text-sm font-semibold text-gray-800 mt-2">Hadir</p>
+                <!-- Badge untuk angka di pojok atas -->
+                <div class="absolute top-0 right-0 bg-green-500 text-white font-semibold text-xs py-1 px-2 rounded-full transform translate-x-1/2 -translate-y-1/2">
+                    {{ $rekappresensi->jmlhadir }}
+                </div>
+            </div>
+    
+            <!-- Izin Card -->
+            <div class="relative text-center text-white bg-white rounded-lg p-3 shadow-lg border border-gray-300 hover:scale-110 transition duration-300 ease-in-out">
+                <span class="material-icons text-4xl text-yellow-500">access_time</span>
+                <p class="text-sm font-semibold text-gray-800 mt-2">Izin</p>
+                <!-- Badge untuk angka di pojok atas -->
+                <div class="absolute top-0 right-0 bg-yellow-500 text-white font-semibold text-xs py-1 px-2 rounded-full transform translate-x-1/2 -translate-y-1/2">
+                    2
+                </div>
+            </div>
+    
+            <!-- Sakit Card -->
+            <div class="relative text-center text-white bg-white rounded-lg p-3 shadow-lg border border-gray-300 hover:scale-110 transition duration-300 ease-in-out">
+                <span class="material-icons text-4xl text-red-500">error</span>
+                <p class="text-sm font-semibold text-gray-800 mt-2">Sakit</p>
+                <!-- Badge untuk angka di pojok atas -->
+                <div class="absolute top-0 right-0 bg-red-500 text-white font-semibold text-xs py-1 px-2 rounded-full transform translate-x-1/2 -translate-y-1/2">
+                    1
+                </div>
+            </div>
+    
+            <!-- Telat Card -->
+            <div class="relative text-center text-white bg-white rounded-lg p-3 shadow-lg border border-gray-300 hover:scale-110 transition duration-300 ease-in-out">
+                <span class="material-icons text-4xl text-orange-500">alarm_on</span>
+                <p class="text-sm font-semibold text-gray-800 mt-2">Telat</p>
+                <!-- Badge untuk angka di pojok atas -->
+                <div class="absolute top-0 right-0 bg-orange-500 text-white font-semibold text-xs py-1 px-2 rounded-full transform translate-x-1/2 -translate-y-1/2">
+                    {{ $rekappresensi->jmlterlambat }}
                 </div>
             </div>
         </div>
+    </div>
+    
+</section>
 
 
-        <div class="row mb-4">
-            <div class="col-6">
-                <div class="card presence-card">
-                    <div class="card-body d-flex align-items-center">
-                        <!-- Foto di sebelah kiri -->
-                        <div class="me-3">
-                            @if ($presensihariini != null)
-                                <img src="{{ asset('storage/uploads/absensi/'.$presensihariini->foto_in) }}" alt="" style="width: 60px; border-radius: 10px; box-shadow: 0 0 0 2px white;">
-                            @else
-                                <ion-icon name="camera"></ion-icon>
-                            @endif
-                        </div>
-                        
-                        <!-- Teks Masuk dan Jam di sebelah kanan -->
+<section class="p-2 pb-24">  <!-- Added pb-24 to create bottom padding -->
+    <div class="bg-white text-gray-800 rounded-xl shadow-xl-custom p-2">
+        <!-- Tabs -->
+        <div class="flex justify-between mb-6">
+            <button id="data-absen-tab" class="w-1/2 py-3 px-6 text-lg font-semibold tab-btn tab-btn-inactive"
+                onclick="switchTab('data-absen')">Bulan Ini</button>
+            <button id="leaderboard-tab" class="w-1/2 py-3 px-6 text-lg font-semibold tab-btn tab-btn-inactive"
+                onclick="switchTab('leaderboard')">Leaderboard</button>
+        </div>
+
+        <!-- Tab Content -->
+        <div id="data-absen" class="tab-content hidden text-center bg-white text-gray-800 rounded-xl shadow-xl-custom p-100">
+            <ul class="space-y-2">
+                @foreach ($historibulanini as $d)
+                @php
+                    $path = asset ('storage/uploads/absensi/'.$d->foto_in);
+                @endphp
+                <li class="flex justify-between items-center p-3 border-b border-gray-200">
+                    <div class="flex items-center">
+                        <ion-icon name="finger-print-outline" class="bg-blue-500 text-white p-2 rounded"> </ion-icon>
+                        <span class="ml-2"> {{ date("d-m-Y", strtotime($d->tgl_presensi)) }} </span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="bg-green-500 text-white px-2 py-1 rounded">{{ $d->jam_in }}</span>
+                        <span class="bg-red-500 text-white px-2 py-1 rounded">{{ $presensihariini != null && $d->jam_out != null ? $d->jam_out : "Belum Absen" }}</span>
+                    </div>
+                </li>
+                @endforeach
+            </ul>
+        </div>
+        <div id="leaderboard" class="tab-content hidden text-left">
+            <ul class="space-y-2">
+                @foreach ($leaderboard as $d)
+                <li class="flex justify-between items-center p-4 bg-white shadow-md rounded-lg">
+                    <div class="flex items-center">
+                        <img src="https://via.placeholder.com/40" alt="User Avatar" class="rounded-full mr-3">
                         <div>
-                            <h5 class="card-title text-white">Masuk</h5>
-                            <p class="card-text text-white" id="checkInTime">{{ $presensihariini != null ? $presensihariini->jam_in : "Belum Absen" }}</p>
+                            <strong class="text-lg">{{ $d->nama_lengkap }}</strong><br>
+                            <small class="text-gray-500">{{ $d->jabatan }}</small>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-6">
-                <div class="card presence-card out">
-                    <div class="card-body d-flex align-items-center">
-                        <!-- Foto di sebelah kiri -->
-                        <div class="me-3">
-                            @if ($presensihariini != null && $presensihariini->foto_out != null)
-                                <img src="{{ asset('storage/uploads/absensi/'.$presensihariini->foto_out) }}" alt="" style="width: 60px; border-radius: 10px; box-shadow: 0 0 0 2px white;">
-                            @else
-                                <ion-icon name="camera"></ion-icon>
-                            @endif
-                        </div>
-                        
-                        <!-- Teks Pulang dan Jam di sebelah kanan -->
-                        <div>
-                            <h5 class="card-title text-white">Pulang</h5>
-                            <p class="card-text text-white" id="checkOutTime">{{ $presensihariini != null && $presensihariini->jam_out != null ? $presensihariini->jam_out : "Belum Absen" }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    <span class="{{ $d->jam_in > '07:00' ? 'text-red-500' : 'text-blue-500' }}">{{ $d->jam_in }}</span>
+                </li>
+                @endforeach
+            </ul>            
         </div>
+    </div>
+</section>
 
-
-        <div class="card mb-4">
-            <div class="card-body">
-                <h4 class="card-title mb-4">Rekap Presensi Bulan {{ $namabulan[$bulanini]}} Tahun {{ $tahunini}}</h4>
-                <div class="row text-center">
-                    <div class="col-3">
-                        <div class="recap-icon text-success"><i class="fas fa-user-check"></i></div>
-                        <div class="recap-name">Hadir</div>
-                        <div class="recap-count">{{ $rekappresensi->jmlhadir }}</div>
-                    </div>
-                    <div class="col-3">
-                        <div class="recap-icon text-primary"><i class="fas fa-calendar-check"></i></div>
-                        <div class="recap-name">Izin</div>
-                        <div class="recap-count">10</div>
-                    </div>
-                    <div class="col-3">
-                        <div class="recap-icon text-info"><i class="fas fa-procedures"></i></div>
-                        <div class="recap-name">Sakit</div>
-                        <div class="recap-count">10</div>
-                    </div>
-                    <div class="col-3">
-                        <div class="recap-icon text-warning"><i class="fas fa-clock"></i></div>
-                        <div class="recap-name">Telat</div>
-                        <div class="recap-count">{{ $rekappresensi->jmlterlambat }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
+        {{-- <div class="card">
             <div class="card-body">
                 <ul class="nav nav-tabs" id="presenceTab" role="tablist">
                     <li class="nav-item" role="presentation">
@@ -159,8 +251,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
           
-            
-        </div>
 @endsection
