@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class PresensiController extends Controller
 {
@@ -101,6 +102,43 @@ class PresensiController extends Controller
 
     public function editProfile()
     {
-        return view("presensi.editprofile");
+        $nik = Auth::guard("karyawan")->user()->nik;
+        $karyawan = DB::table("karyawan")->where("nik", $nik)->first();
+        return view("presensi.editprofile", compact("karyawan"));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $nik = Auth::guard("karyawan")->user()->nik;
+        $nama_lengkap = $request->nama_lengkap;
+        $jabatan = $request->jabatan;
+        $no_hp = $request->no_hp;
+        $email = $request->email;
+        $password = $request->password;
+        $foto = $request->foto;
+
+        if(empty($password)){
+            $data = [
+                "nama_lengkap" => $nama_lengkap,
+                "no_hp" => $no_hp,
+                "email" => $email,
+                "foto" => $foto,
+            ];
+        } else { $data = [
+            "nama_lengkap" => $nama_lengkap,
+            "no_hp" => $no_hp,
+            "email" => $email,
+            "password" => Hash::make($password),
+            "foto" => $foto,
+        ];
+    }
+
+    $update = DB::table("karyawan")->where("nik", $nik)->update($data);
+
+        if($update){
+            return redirect()->back()->withInput()->with("success", "Profile Berhasil Diubah");
+        } else {
+            return redirect()->back()->with("error", "Profile Gagal Diubah");
+        }
     }
 }
