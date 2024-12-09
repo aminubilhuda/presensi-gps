@@ -47,8 +47,8 @@
 
 
     body {
-        background: linear-gradient(to bottom, #4b0082, #620031),
-            url('https://www.transparenttextures.com/patterns/cardboard.png');
+        /* background: linear-gradient(to bottom, #4b0082, #620031), */
+        /* url('https://www.transparenttextures.com/patterns/cardboard.png'); */
         /* Background Gradien dengan Gambar Tekstur */
         min-height: 100vh;
         /* Pastikan body mencakup seluruh layar */
@@ -60,6 +60,7 @@
         /* Menempatkan gambar tekstur di tengah */
         color: white;
         /* Warna teks putih */
+        background-color: #2196f3;
 
     }
 
@@ -110,7 +111,7 @@
 
     .inactive-nav-btn:hover {
         color: white;
-        background-color: #4b5563;
+        /* background-color: #4b5563; */
         /* Warna hover */
         border-radius: 0.75rem;
     }
@@ -124,28 +125,6 @@
         /* Menghilangkan garis bawah */
     }
 
-    .inactive-nav-btn:hover {
-        color: white;
-        background-color: #4b5563;
-        /* Warna hover */
-        border-radius: 0.75rem;
-    }
-
-    /* Styling untuk link yang tidak aktif */
-    .inactive-nav-btn {
-        color: #d1d5db;
-        /* Warna tombol tidak aktif */
-        transition: all 0.3s ease;
-        text-decoration: none;
-        /* Menghilangkan garis bawah */
-    }
-
-    .inactive-nav-btn:hover {
-        color: white;
-        background-color: #4b5563;
-        /* Warna hover */
-        border-radius: 0.75rem;
-    }
 
     /* Styling untuk link yang aktif */
     .active-nav-btn {
@@ -164,38 +143,54 @@
 
     /* Mengubah warna ikon ketika link aktif */
     .active-nav-btn .material-icons {
-        color: #ff007f;
+        color: #2196f3;
         /* Ikon menjadi merah saat link aktif */
-        transform: scale(1.8);
+        transform: scale(1);
+    }
+
+    /* Mengubah warna ikon ketika link aktif */
+    .active-nav-btn-camera .material-icons {
+        color: #ffffff;
+        /* Ikon menjadi merah saat link aktif */
+        transform: scale(1);
     }
 
     /* Animasi untuk link aktif */
     @keyframes active-btn-animation {
         0% {
             transform: rotate(0deg) translateY(0);
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            /* box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); */
         }
 
         50% {
             transform: rotate(15deg) translateY(-6px);
             /* Rotasi dan geser tombol sedikit */
-            box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.3);
+            /* box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.3); */
             /* Bayangan lebih besar */
         }
 
         100% {
             transform: rotate(0deg) translateY(0);
             /* Kembali ke posisi semula */
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            /* box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); */
             /* Kembali ke bayangan semula */
         }
     }
 
     /* Efek hover untuk link yang tidak aktif */
     .inactive-nav-btn:hover {
-        background-color: #4b5563;
+        /* background-color: #4b5563; */
         transform: translateY(-4px);
         /* Efek hover sedikit bergeser ke atas */
+    }
+
+    /* Styling untuk link yang tidak aktif */
+    .inactive-nav-btn {
+        color: #d1d5db;
+        /* Warna tombol tidak aktif */
+        transition: all 0.3s ease;
+        text-decoration: none;
+        /* Menghilangkan garis bawah */
     }
 
     /* Hover pada link yang aktif (hanya untuk perubahan background) */

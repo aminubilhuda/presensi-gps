@@ -25,24 +25,26 @@
 
 @section('content')
 
-    @if (session('success') || session('error'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                Swal.fire({
-                    icon: '{{ session('success') ? 'success' : 'error' }}',
-                    title: '{{ session('success') ? 'Success!' : 'Error!' }}',
-                    text: '{{ session('success') ?? session('error') }}',
-                    timer: 3000,
-                    showConfirmButton: false
-                });
-            });
-        </script>
+    @php
+        $messagesuccess = Session::get('success');
+        $messageerror = Session::get('error');
+    @endphp
+
+    @if ($messagesuccess)
+        <div class="flex items-center rounded bg-green-400 text-white text-sm font-bold px-4 py-3 ml-2 mr-2" role="alert">
+          {{ $messagesuccess }}
+        </div>
+    @endif
+    @if ($messageerror)
+        <div class="flex items-center rounded bg-red-400 text-white text-sm font-bold px-4 py-3 ml-2 mr-2" role="alert">
+          {{ $messageerror }}
+        </div>
     @endif
 
-<section class="pb-24">
+<section class="pb-64">
     <div class="max-w-lg mx-auto p-6 h-screen">
         
-        <form action="/presensi/{{ encrypt($karyawan->nik) }}/updateprofile" method="POST" enctype="multipart/form-data">
+        <form action="/presensi/{{ $karyawan->nik }}/updateprofile" method="POST" enctype="multipart/form-data">
           @csrf
           <!-- Nama Lengkap -->
           <div class="mb-4">
@@ -59,7 +61,7 @@
           <!-- Email -->
           <div class="mb-4">
             <label for="email" class="block text-white-600 text-sm font-medium">Email</label>
-            <input type="text" id="no_hp" name="email" value="{{ $karyawan->email }}" class="w-full text-gray-900 p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Masukkan Nomor HP" required>
+            <input type="text" id="email" name="email" value="{{ $karyawan->email }}" class="w-full text-gray-900 p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Masukkan Nomor HP" required>
           </div>
     
           <!-- Password -->
@@ -71,7 +73,7 @@
           <!-- Upload Foto -->
           <div class="mb-4">
             <label for="foto" class="block text-white-600 text-sm font-medium">Upload Foto</label>
-            <input type="file" id="foto" name="foto"  class="w-full text-gray-900 p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" accept="image/*" onchange="previewImage(event)">
+            <input type="file" id="foto" name="foto" accept=".png, .jpeg, .jpg" class="w-full text-gray-900 p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" accept="image/*" onchange="previewImage(event)">
             
             <!-- Preview Image -->
             <div class="mt-4">
@@ -81,7 +83,7 @@
     
           <!-- Submit Button -->
           <div class="mt-6">
-            <button type="submit" class="w-full py-3 bg-green-400 text-white text-lg font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400">Kirim</button>
+            <button type="submit" class="w-full py-3 bg-green-400 text-white text-lg font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400">Update</button>
           </div>
         </form>
       </div>

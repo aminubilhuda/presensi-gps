@@ -114,8 +114,16 @@ class PresensiController extends Controller
         $jabatan = $request->jabatan;
         $no_hp = $request->no_hp;
         $email = $request->email;
-        $password = $request->password;
-        $foto = $request->foto;
+        $password = Hash::make($request->password);
+
+        $karyawan = DB::table("karyawan")->where("nik", $nik)->first();
+
+        if ($request->hasFile('foto')) {
+            $foto = $nik.".".$request->file('foto')->getClientOriginalExtension();
+            $request->file('foto')->storeAs('public/uploads/karyawan', $foto);
+        } else {
+            $foto = $karyawan->foto;
+        }
 
         if(empty($password)){
             $data = [
@@ -128,17 +136,20 @@ class PresensiController extends Controller
             "nama_lengkap" => $nama_lengkap,
             "no_hp" => $no_hp,
             "email" => $email,
-            "password" => Hash::make($password),
+            "password" => $password,
             "foto" => $foto,
         ];
     }
 
     $update = DB::table("karyawan")->where("nik", $nik)->update($data);
-
         if($update){
-            return redirect()->back()->withInput()->with("success", "Profile Berhasil Diubah");
+            return redirect()->back()->with("success", "Profile Berhasil Diubah");
         } else {
             return redirect()->back()->with("error", "Profile Gagal Diubah");
         }
+    }
+    public function history()
+    {
+        return view("presensi.history");
     }
 }

@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string("nama_lengkap");
             $table->string("nik")->unique();
             $table->string("jabatan");
-            $table->string("no_hp");
-            $table->string("email")->nullable();
+            $table->string("no_hp")->unique();
+            $table->string("email")->unique();
             $table->string("password");
             $table->string("foto")->nullable();
             $table->rememberToken();

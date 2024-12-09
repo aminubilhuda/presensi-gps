@@ -24,7 +24,7 @@ class Dataawal extends Seeder
         ]);
 
         DB::table('karyawan')->insert([
-            'nama_lengkap' => "Siti Astina Maharani",
+            'nama_lengkap' => "Asawauuu",
             "nik"=> "4321",
             "jabatan"=> "Staff IT",
             "no_hp"=> "088888888888",

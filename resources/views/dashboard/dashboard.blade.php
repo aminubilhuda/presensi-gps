@@ -3,25 +3,31 @@
 @section('content')
 
 <!-- Main Profile Card -->
-<section class="p-2">
-    <div
-        class="bg-gradient-to-r from-indigo-500 to-purple-600 p-6 rounded-3xl shadow-xl-custom flex items-center space-x-6 transition-transform transform hover:scale-105 ease-in-out">
+<section class="p-4">
+    <div class="bg-gradient-to-r from-blue-400 to-blue-600 p-6 rounded-3xl shadow-xl-custom flex items-center space-x-6 transition-transform transform hover:scale-105 ease-in-out">
         <!-- Profile Picture -->
         <div class="relative">
-            <img src="{{asset('assets_k/img/sample/avatar/avatar1.jpg')}}" alt="Profile"
-                class="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg hover:scale-105 transition duration-300">
+            <!-- Profile Picture -->
+            @if(!empty(Auth::guard('karyawan')->user()->foto))
+                <img src="{{asset('storage/public/uploads/karyawan/'.Auth::guard('karyawan')->user()->foto)}}" alt="Profile"
+                    class="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg hover:scale-105 transition duration-300">
+            @else
+                <img src="https://via.placeholder.com/150" alt="Profile"
+                    class="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg hover:scale-105 transition duration-300">
+            @endif
             <!-- Badge or Status indicator -->
             <span class="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-green-500 border-2 border-white"></span>
         </div>
 
         <!-- Profile Info -->
         <div class="text-white">
-            <h2 class="text-2xl font-semibold tracking-tight">{{Auth::guard("karyawan")->user()->nama_lengkap}}</h2>
-            <p class="text-lg opacity-80 mt-1">{{Auth::guard("karyawan")->user()->nik}}</p>
-            <p class="text-sm opacity-70 mt-1">{{Auth::guard("karyawan")->user()->jabatan}}</p>
+            <h2 class="text-xl font-semibold tracking-tight">{{Auth::guard("karyawan")->user()->nama_lengkap}}</h2>
+            <p class="text-lg opacity-90 mt-2">{{Auth::guard("karyawan")->user()->nik}}</p>
+            <p class="text-sm opacity-80 mt-1">{{Auth::guard("karyawan")->user()->jabatan}}</p>
         </div>
     </div>
 </section>
+
 
 <!-- Card Overview (Cuti, Histori, Lokasi, Profile) -->
 <section class="p-2">
@@ -54,41 +60,45 @@
 </section>
 
 <!-- Card for Masuk and Pulang with Photos -->
-<section class="p-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+<section class="p-2 grid grid-cols-2 gap-2">
     <!-- Masuk Card -->
     <div
-        class="bg-white text-gray-800 p-8 rounded-xl shadow-xl-custom glassmorphism hover:scale-105 transition duration-300 ease-in-out">
-        <div class="flex items-center space-x-4">
-            @if ($presensihariini != null)
-            <img src="{{ asset('storage/uploads/absensi/'.$presensihariini->foto_in) }}" alt="Masuk Photo"
-                class="w-16 h-16 rounded-full object-cover border-4 border-green-500 shadow-lg">
-            @else
-            <div class="bg-blue">
-                <ion-icon name="camera"></ion-icon>
-            </div>
-            @endif
-            <div>
-                <p class="text-lg font-semibold opacity-70">Masuk</p>
-                <p class="text-3xl font-bold text-green-500">{{ $presensihariini != null ? $presensihariini->jam_in : "Belum Absen" }}</p>
-            </div>
+    class="bg-white text-gray-800 p-8 rounded-xl shadow-xl-custom glassmorphism hover:scale-105 transition duration-300 ease-in-out">
+    <div class="flex items-center space-x-2">
+        @if ($presensihariini != null)
+        <!-- Gambar Masuk -->
+        <img src="{{ asset('storage/public/uploads/absensi/'.$presensihariini->foto_in) }}" alt="Masuk Photo"
+            class="w-16 h-16 rounded-full object-cover border-4 border-green-500 shadow-lg ml-[-15%]"> <!-- Menggeser gambar ke kiri -->
+        @else
+        <div class="bg-blue">
+            <img src="https://via.placeholder.com/150" alt="Profile"
+            class="w-16 h-16 rounded-full object-cover border-4 border-green-500 shadow-lg ml-[-15%]"> <!-- Menggeser gambar ke kiri -->
+        </div>
+        @endif
+        <div>
+            <p class="text-lg font-semibold opacity-70">Masuk</p>
+            <p class="test-sm font-bold text-green-500">{{ $presensihariini != null ? $presensihariini->jam_in : "Belum Absen" }}</p>
         </div>
     </div>
+</div>
+
 
     <!-- Pulang Card -->
     <div
         class="bg-white text-gray-800 p-8 rounded-xl shadow-xl-custom glassmorphism hover:scale-105 transition duration-300 ease-in-out">
-        <div class="flex items-center space-x-4">
+        <div class="flex space-x-2">
             @if ($presensihariini != null && $presensihariini->foto_out != null)
-            <img src="{{ asset('storage/uploads/absensi/'.$presensihariini->foto_out) }}" alt="Pulang Photo"
-                class="w-16 h-16 rounded-full object-cover border-4 border-red-500 shadow-lg">
+            <img src="{{ asset('storage/public/uploads/absensi/'.$presensihariini->foto_out) }}" alt="Pulang Photo"
+                class="w-16 h-16 rounded-full object-cover border-4 border-red-500 shadow-lg ml-[-15%]">
             @else
             <div class="bg-blue">
-                <ion-icon name="camera"></ion-icon>
+                <img src="https://via.placeholder.com/150" alt="Profile"
+                class="w-16 h-16 rounded-full object-cover border-4 border-red-500 shadow-lg ml-[-15%]"> <!-- Menggeser gambar ke kiri -->
             </div>
             @endif
             <div>
                 <p class="text-lg font-semibold opacity-70">Pulang</p>
-                <p class="text-3xl font-bold text-red-500">{{ $presensihariini != null && $presensihariini->jam_out != null ? $presensihariini->jam_out : "Belum Absen" }}</p>
+                <p class="test-sm font-bold text-red-500">{{ $presensihariini != null && $presensihariini->jam_out != null ? $presensihariini->jam_out : "Belum Absen" }}</p>
             </div>
         </div>
     </div>
@@ -219,7 +229,7 @@
                             @endphp
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
-                                    <i class="fas fa-fingerprint me-2 text-primary"></i>
+                                    <i class="fas fa-fingerprint me-2 bg-blue-500"></i>
                                     {{ date("d-m-Y", strtotime($d->tgl_presensi)) }}
                                 </div>
                                 <div>
@@ -236,8 +246,13 @@
                             @foreach ($leaderboard as $d)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
+                                    @if ($d->foto != null)
+                                    <img src="{{ asset('storage/public/uploads/karyawan/'.$d->foto) }}" alt="User Avatar"
+                                        class="rounded-circle me-3">
+                                    @else
                                     <img src="https://via.placeholder.com/40" alt="User Avatar"
                                         class="rounded-circle me-3">
+                                    @endif
                                     <div>
                                         <strong>{{ $d->nama_lengkap }}</strong><br>
                                         <small class="text-muted">{{$d->jabatan}}</small>
