@@ -41,14 +41,14 @@ class PresensiController extends Controller
             $ket = "in";
         }
         $image = $request->image;
-        $folderPath = "uploads/absensi/";
+        $folderPath = "public/uploads/absensi/";
         $formatName = $nik . "-" . $tgl_presensi. "-" .$ket;
         $image_parts = explode(";base64", $image);
         $image_base64 = base64_decode($image_parts[1]);
         $fileName = $formatName . ".png";
         $file = $folderPath . $fileName;
         
-        if ($radius > 10000) {
+        if ($radius > 60) {
             echo "error|Maaf Anda Berada Diluar Radius, Jarak anda " . $radius ." meter dari kantor|out-radius";
         } else {
             if($cek > 0){
