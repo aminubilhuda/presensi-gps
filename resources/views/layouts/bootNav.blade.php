@@ -16,9 +16,9 @@
             <span class="material-icons text-2xl">description</span>
             <span class="text-xs">Docs</span>
         </a>
-        <a id="settings-link" href="/editprofile" class="flex flex-col items-center gap-1 text-gray-600 {{request()->path() == 'editprofile' ? 'active-nav-btn' : ''}} inactive-nav-btn">
-            <span class="material-icons text-2xl">people</span>
-            <span class="text-xs">Me</span>
+        <a id="settings-link" href="/setting" class="flex flex-col items-center gap-1 text-gray-600 {{request()->path() == 'setting' ? 'active-nav-btn' : ''}} inactive-nav-btn">
+            <span class="material-icons text-2xl">settings</span>
+            <span class="text-xs">Setting</span>
         </a>
     </nav>
     

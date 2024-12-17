@@ -52,10 +52,12 @@
         </div>
 
         <!-- Profile Icon -->
-        <div class="flex flex-col items-center text-center hover:scale-150 transition duration-300 ease-in-out">
-            <span class="material-icons text-4xl text-blue-500">account_circle</span>
-            <p class="mt-2 text-lg text-gray-700">Profil</p>
-        </div>
+        <a href="/editprofile">
+            <div class="flex flex-col items-center text-center hover:scale-150 transition duration-300 ease-in-out">
+                <span class="material-icons text-4xl text-blue-500">account_circle</span>
+                <p class="mt-2 text-lg text-gray-700">Profil</p>
+            </div>
+        </a>
     </div>
 </section>
 
@@ -68,11 +70,11 @@
         @if ($presensihariini != null)
         <!-- Gambar Masuk -->
         <img src="{{ asset('storage/public/uploads/absensi/'.$presensihariini->foto_in) }}" alt="Masuk Photo"
-            class="w-16 h-16 rounded-full object-cover border-4 border-green-500 shadow-lg ml-[-15%]"> <!-- Menggeser gambar ke kiri -->
+            class="w-16 h-16 rounded-full object-cover border-4 border-green-500 shadow-lg"> <!-- Menggeser gambar ke kiri -->
         @else
         <div class="bg-blue">
             <img src="https://via.placeholder.com/150" alt="Profile"
-            class="w-16 h-16 rounded-full object-cover border-4 border-green-500 shadow-lg ml-[-15%]"> <!-- Menggeser gambar ke kiri -->
+            class="w-16 h-16 rounded-full object-cover border-4 border-green-500 shadow-lg"> <!-- Menggeser gambar ke kiri -->
         </div>
         @endif
         <div>
@@ -89,11 +91,11 @@
         <div class="flex space-x-2">
             @if ($presensihariini != null && $presensihariini->foto_out != null)
             <img src="{{ asset('storage/public/uploads/absensi/'.$presensihariini->foto_out) }}" alt="Pulang Photo"
-                class="w-16 h-16 rounded-full object-cover border-4 border-red-500 shadow-lg ml-[-15%]">
+                class="w-16 h-16 rounded-full object-cover border-4 border-red-500 shadow-lg">
             @else
             <div class="bg-blue">
                 <img src="https://via.placeholder.com/150" alt="Profile"
-                class="w-16 h-16 rounded-full object-cover border-4 border-red-500 shadow-lg ml-[-15%]"> <!-- Menggeser gambar ke kiri -->
+                class="w-16 h-16 rounded-full object-cover border-4 border-red-500 shadow-lg"> <!-- Menggeser gambar ke kiri -->
             </div>
             @endif
             <div>

@@ -27,4 +27,7 @@ Route::middleware(['auth:karyawan'])->group(function () {
 
     // history
     Route::get('/history', [PresensiController::class,'history'])->name('presensiHistory');
+    
+    // setting
+    Route::get('/setting', [PresensiController::class,'setting'])->name('presensiSetting');
 });
